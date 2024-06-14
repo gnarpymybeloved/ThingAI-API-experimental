@@ -70,16 +70,16 @@ app.post('/process-request', async (req, res) => {
         ...messages
       ];
   
-      // Prepare the new JSON payload
       const newPayload = {
         model: newModel,
         messages: modifiedMessages
       };
-  
+      console.log(newPayload)
       const apiUrl = 'https://reverse.mubi.tech/v1/chat/completions';
       const apiResponse = await axios.post(apiUrl, newPayload);
   
       const responseData = apiResponse.data;
+      console.log(responseData)
   
       if (responseData.startsWith('&^%draw') && draw !== 0) {
         const drawNumber = responseData.match(/&\^%draw(\d)/);
@@ -112,7 +112,12 @@ app.post('/process-request', async (req, res) => {
         const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
         const secondApiResponse = await axios.post(secondApiUrl, drawPayload);
   
-        return res.json(secondApiResponse.data);
+        const formattedData = {
+          role: 'assistant',
+          message: secondApiResponse.data.url,
+        };
+        console.log(formattedData)
+        return res.json(formattedData);
       }
 
       res.json(responseData);
