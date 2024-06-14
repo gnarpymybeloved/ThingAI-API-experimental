@@ -4,5 +4,6 @@ Experimental build of the ThingAI API
 # ALL DATA IS UNENCRYPTED AND PUBLIC
 Software not designed for commercial use
 
-# API Url
-https://thing-ai-api-experimental.vercel.app
+# API Urls
+https://windowsbuild3r.is-a.dev/thingai/experimental
+https://windowsbuild3r.is-a.dev/thingai/experimental/models
