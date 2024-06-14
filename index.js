@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(express.json());
 
-app.post('/process-request', (req, res) => {
+app.post('/process-request', async (req, res) => {
   try {
     const { model, messages } = req.body;
     let draw;
