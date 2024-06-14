@@ -1,2 +1,2 @@
-# ThingAI-API-experimental
-test run of the new ThingAI API
+# FOR DEVELOPER USE ONLY
+Experimental run of the new ThingAI api, DO NOT USE
