@@ -78,7 +78,7 @@ app.post('/process-request', async (req, res) => {
       const apiUrl = 'https://reverse.mubi.tech/v1/chat/completions';
       const apiResponse = await axios.post(apiUrl, newPayload);
   
-      const responseData = apiResponse.data;
+      const responseData = apiResponse.message;
       console.log(responseData)
   
       if (responseData.startsWith('&^%draw') && draw !== 0) {
