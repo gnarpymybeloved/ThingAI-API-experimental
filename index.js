@@ -120,8 +120,9 @@ app.post('/process-request', async (req, res) => {
         return res.json(formattedData);
       }
 
-      res.json(responseData);
+      res.status(200).json(responseData);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'ThingAI servers are currently having some issues, try again later.' });
     }
   });
