@@ -1,5 +1,5 @@
-# COMMERCIAL VERSION
-Production version of the ThingAI API
+# Production Build
+Production buikd of the ThingAI API
 
-# ALL DATA IS ENCRYPTED
-Software designed for commercial use
+# All data is encrypted
+Your data is safe when using the production servers
