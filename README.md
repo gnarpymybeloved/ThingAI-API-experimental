@@ -5,4 +5,7 @@ Production buikd of the ThingAI API
 Your data is safe when using the production servers
 
 # API Url
-https://thing-ai-api.vercel.app
+
+# API Urls
+https://windowsbuild3r.is-a.dev/thingai/production
+https://windowsbuild3r.is-a.dev/thingai/production/models
