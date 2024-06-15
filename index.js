@@ -91,7 +91,7 @@ app.post('/process-request', async (req, res) => {
         const apiResponse = await axios.post(apiUrl, newPayload);
 
         if (apiResponse.data && apiResponse.data.choices && apiResponse.data.choices.length > 0) {
-            const responseData = apiResponse.data.choices[0].message;
+            let responseData = apiResponse.data.choices[0].message;
             hasImage = "no"
             if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0 && ProcessDrawing == "yes") {
                 hasImage = "yes"
