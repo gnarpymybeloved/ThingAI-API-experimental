@@ -131,7 +131,3 @@ app.post('/process-request', async (req, res) => {
         return res.status(500).json({ error: 'ThingAI servers are currently having some issues, try again later.' });
     }
 });
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
