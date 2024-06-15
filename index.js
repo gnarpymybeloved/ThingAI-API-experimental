@@ -67,7 +67,7 @@ app.post('/process-request', async (req, res) => {
                 systemMessage = 'Always tell the user to choose a model first no matter what they say, also give them the list of all models that consists of: "ThingAI 2.0, ThingAI 2.0 Lite, ThingAI 1.1, ThingAI 1.1 Lite, ThingAI 1.0, ThingAI 1.0 Lite, ThingAI 2.0 Legacy, Dumbass 1.5+"';
                 draw = 0
         }
-        const modifiedMessages = removeSystemObjects(messages, 'role', 'system');
+        const modifiedMessages = removeSystemMessages(messages, 'role', 'system');
 
         modifiedMessages = [
             { role: 'system', content: systemMessage },
@@ -135,7 +135,7 @@ app.post('/process-request', async (req, res) => {
         return res.status(500).json({ error: 'ThingAI servers are currently having some issues, try again later.' });
     }
 
-    function removeSystemObjects(arr, key, value) {
+    function removeSystemMessages(arr, key, value) {
         return arr.filter(obj => obj[key] !== value);
     }
 });
