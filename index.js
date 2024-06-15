@@ -86,14 +86,15 @@ app.post('/process-request', async (req, res) => {
             model: newModel,
             messages: modifiedMessages
         };
-
+        var hasImage
         const apiUrl = 'https://reverse.mubi.tech/v1/chat/completions';
         const apiResponse = await axios.post(apiUrl, newPayload);
 
         if (apiResponse.data && apiResponse.data.choices && apiResponse.data.choices.length > 0) {
             const responseData = apiResponse.data.choices[0].message;
-
+            hasImage = 0
             if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0 && ProcessDrawing == "yes") {
+                hasImage = 1
                 const drawNumber = responseData.content.match(/&\^%draw(\d)/);
                 let newDrawModel;
 
@@ -118,7 +119,8 @@ app.post('/process-request', async (req, res) => {
 
                 const drawPayload = {
                     model: newDrawModel,
-                    prompt: responseData.content.substring(8)
+                    prompt: responseData.content.substring(8),
+                    hasImage: hasImage,
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
