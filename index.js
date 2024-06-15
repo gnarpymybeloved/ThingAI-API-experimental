@@ -14,10 +14,12 @@ app.get('/', (req, res) => {
 
 app.post('/process-request', async (req, res) => {
     try {
-        const { model, messages } = req.body;
+        const { model, return_image_url, messages } = req.body;
         let draw;
         let newModel;
         let systemMessage;
+        let ProcessDrawing;
+        ProcessDrawing = return_image_url
 
         switch (model) {
             case 'ThingAI 2.0':
@@ -82,7 +84,7 @@ app.post('/process-request', async (req, res) => {
         if (apiResponse.data && apiResponse.data.choices && apiResponse.data.choices.length > 0) {
             const responseData = apiResponse.data.choices[0].message;
 
-            if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0) {
+            if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0 && ProcessDrawing == "yes") {
                 const drawNumber = responseData.content.match(/&\^%draw(\d)/);
                 let newDrawModel;
 
