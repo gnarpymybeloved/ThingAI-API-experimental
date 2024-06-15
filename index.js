@@ -82,7 +82,7 @@ app.post('/process-request', async (req, res) => {
         if (apiResponse.data && apiResponse.data.choices && apiResponse.data.choices.length > 0) {
             const responseData = apiResponse.data.choices[0].message;
 
-            if (typeof responseData === 'string' && responseData.startsWith('&^%draw') && draw !== 0) {
+            if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0) {
                 const drawNumber = responseData.match(/&\^%draw(\d)/);
                 let newDrawModel;
 
