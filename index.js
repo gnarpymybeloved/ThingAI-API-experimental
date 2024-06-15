@@ -56,7 +56,7 @@ app.post('/process-request', async (req, res) => {
                 draw = 1
                 break;
             case 'Dumbass 1.5+':
-                newModel = 'gpt-4-turbo';
+                newModel = 'gpt-3.5-turbo';
                 systemMessage = "You don't know your name, you don't know very much but you are surprisingly good at addition of whole positive numbers, you do not remeber much and you don't type so well";
                 draw = 0
                 break;
@@ -83,7 +83,7 @@ app.post('/process-request', async (req, res) => {
             const responseData = apiResponse.data.choices[0].message;
 
             if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0) {
-                const drawNumber = responseData.match(/&\^%draw(\d)/);
+                const drawNumber = responseData.content.match(/&\^%draw(\d)/);
                 let newDrawModel;
 
                 if (drawNumber) {
