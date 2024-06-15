@@ -107,7 +107,7 @@ app.post('/process-request', async (req, res) => {
 
                 const drawPayload = {
                     model: newDrawModel,
-                    prompt: responseData.substring(8)
+                    prompt: responseData.content.substring(8)
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
