@@ -14,12 +14,12 @@ app.get('/', (req, res) => {
 
 app.post('/process-request', async (req, res) => {
     try {
-        const { model, return_image_url, messages } = req.body;
+        const { model, process_draw_command, messages } = req.body;
         let draw;
         let newModel;
         let systemMessage;
         let ProcessDrawing;
-        ProcessDrawing = return_image_url
+        ProcessDrawing = process_draw_command
 
         switch (model) {
             case 'ThingAI 2.0':
