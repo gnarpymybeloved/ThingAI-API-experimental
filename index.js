@@ -66,7 +66,7 @@ app.post('/process-request', async (req, res) => {
                 break;
             case 'Dumbass 1.5+':
                 newModel = 'gpt-3.5-turbo';
-                systemMessage = "You don't know your name, you don't know very much but you are surprisingly good at addition of whole positive numbers, you do not remeber much and you don't type so well";
+                systemMessage = "You don't know your name, you don't know very much but you are surprisingly good at addition of whole positive numbers, you do not remeber much and you don't type so well, you are generally pretty dumb and stoopid and make lots of typos";
                 draw = 0
                 break;
             default:
@@ -86,7 +86,7 @@ app.post('/process-request', async (req, res) => {
             model: newModel,
             messages: modifiedMessages
         };
-        let hasImage
+        var hasImage
         const apiUrl = 'https://reverse.mubi.tech/v1/chat/completions';
         const apiResponse = await axios.post(apiUrl, newPayload);
 
@@ -120,7 +120,6 @@ app.post('/process-request', async (req, res) => {
                 const drawPayload = {
                     model: newDrawModel,
                     prompt: responseData.content.substring(8),
-                    hasImage: hasImage,
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
@@ -134,7 +133,11 @@ app.post('/process-request', async (req, res) => {
 
                 return res.json(formattedData);
             }
-
+            responseData = {
+                role: responseData.role,
+                content: responseData.content,
+                hasImage: hasImage,
+            }
             return res.status(200).json(responseData);
         } else {
             return res.status(418).json({ error: 'Unexpected response from ThingAI API.' });
