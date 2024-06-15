@@ -15,6 +15,14 @@ app.get('/', (req, res) => {
 app.post('/process-request', async (req, res) => {
     try {
         const { model, process_draw_command, messages } = req.body;
+        if (!Array.isArray(messages) || messages.length === 0) {
+            return res.status(400).json({ error: 'Invalid or empty messages array.' });
+        }
+        for (const msg of messages) {
+            if (!msg || typeof msg !== 'object' || !msg.role || !msg.content) {
+                return res.status(400).json({ error: 'Each message must be an object with role and content properties.' });
+            }
+        }
         let draw;
         let newModel;
         let systemMessage;
@@ -67,7 +75,9 @@ app.post('/process-request', async (req, res) => {
                 systemMessage = 'Always tell the user to choose a model first no matter what they say, also give them the list of all models that consists of: "ThingAI 2.0, ThingAI 2.0 Lite, ThingAI 1.1, ThingAI 1.1 Lite, ThingAI 1.0, ThingAI 1.0 Lite, ThingAI 2.0 Legacy, Dumbass 1.5+"';
                 draw = 0
         }
+
         let modifiedMessages = removeSystemMessages(messages, 'role', 'system');
+
 
         modifiedMessages = [
             { role: 'system', content: systemMessage },
@@ -78,7 +88,6 @@ app.post('/process-request', async (req, res) => {
             model: newModel,
             messages: modifiedMessages
         };
-
 
         const apiUrl = 'https://reverse.mubi.tech/v1/chat/completions';
         const apiResponse = await axios.post(apiUrl, newPayload);
