@@ -1,7 +1,7 @@
 {
-  "name": "ThingAI-API-experimental",
+  "name": "ThingAI-API",
   "version": "1.0.0",
-  "description": "Experminetal version of the ThingAI Api",
+  "description": "ThingAI API",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gnarpymybeloved/ThingAI-API-experimental.git"
+    "url": "git+https://github.com/gnarpymybeloved/ThingAI-API.git"
   },
   "author": "Cryptid",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gnarpymybeloved/ThingAI-API-experimental/issues"
+    "url": "https://github.com/gnarpymybeloved/ThingAI-API/issues"
   },
   "homepage": "https://wisienki2ie.github.io/ThingAI",
   "dependencies": {
