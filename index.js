@@ -115,7 +115,7 @@ app.post('/process-request', async (req, res) => {
 
                 const formattedData = {
                     role: 'assistant',
-                    content: secondApiResponse.data[0],
+                    content: secondApiResponse.data[0].url,
                 };
 
                 return res.json(formattedData);
