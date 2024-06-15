@@ -1,0 +1,52 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "ThingAI 2.0",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 2.0 Lite",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 1.1",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 1.1 Lite",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 1.0",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 1.0 Lite",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "ThingAI 2.0 Legacy",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    },
+    {
+      "id": "Dumbass 1.5+",
+      "object": "model",
+      "owned_by": "Cryptid",
+      "type": "chat.completions"
+    }]
+}

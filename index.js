@@ -14,10 +14,20 @@ app.get('/', (req, res) => {
 
 app.post('/process-request', async (req, res) => {
     try {
-        const { model, messages } = req.body;
+        const { model, process_draw_command, messages } = req.body;
+        if (!Array.isArray(messages) || messages.length === 0) {
+            return res.status(400).json({ error: 'Invalid or empty messages array.' });
+        }
+        for (const msg of messages) {
+            if (!msg || typeof msg !== 'object' || !msg.role || !msg.content) {
+                return res.status(400).json({ error: 'Each message must be an object with role and content properties.' });
+            }
+        }
         let draw;
         let newModel;
         let systemMessage;
+        let ProcessDrawing;
+        ProcessDrawing = process_draw_command
 
         switch (model) {
             case 'ThingAI 2.0':
@@ -56,7 +66,7 @@ app.post('/process-request', async (req, res) => {
                 draw = 1
                 break;
             case 'Dumbass 1.5+':
-                newModel = 'gpt-4-turbo';
+                newModel = 'gpt-3.5-turbo';
                 systemMessage = "You don't know your name, you don't know very much but you are surprisingly good at addition of whole positive numbers, you do not remeber much and you don't type so well";
                 draw = 0
                 break;
@@ -66,9 +76,12 @@ app.post('/process-request', async (req, res) => {
                 draw = 0
         }
 
-        const modifiedMessages = [
+        let modifiedMessages = removeSystemMessages(messages, 'role', 'system');
+
+
+        modifiedMessages = [
             { role: 'system', content: systemMessage },
-            ...(Array.isArray(messages) ? messages : [])
+            ...(Array.isArray(modifiedMessages) ? modifiedMessages : [])
         ];
 
         const newPayload = {
@@ -82,8 +95,8 @@ app.post('/process-request', async (req, res) => {
         if (apiResponse.data && apiResponse.data.choices && apiResponse.data.choices.length > 0) {
             const responseData = apiResponse.data.choices[0].message;
 
-            if (typeof responseData === 'string' && responseData.startsWith('&^%draw') && draw !== 0) {
-                const drawNumber = responseData.match(/&\^%draw(\d)/);
+            if (typeof responseData.content === 'string' && responseData.content.startsWith('&^%draw') && draw !== 0 && ProcessDrawing == "yes") {
+                const drawNumber = responseData.content.match(/&\^%draw(\d)/);
                 let newDrawModel;
 
                 if (drawNumber) {
@@ -107,7 +120,7 @@ app.post('/process-request', async (req, res) => {
 
                 const drawPayload = {
                     model: newDrawModel,
-                    prompt: responseData.substring(8)
+                    prompt: responseData.content.substring(8)
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
@@ -115,7 +128,7 @@ app.post('/process-request', async (req, res) => {
 
                 const formattedData = {
                     role: 'assistant',
-                    message: secondApiResponse.data.url,
+                    content: secondApiResponse.data.data[0].url,
                 };
 
                 return res.json(formattedData);
@@ -130,8 +143,8 @@ app.post('/process-request', async (req, res) => {
         console.log(error);
         return res.status(500).json({ error: 'ThingAI servers are currently having some issues, try again later.' });
     }
-});
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    function removeSystemMessages(arr, key, value) {
+        return arr.filter(obj => obj[key] !== value);
+    }
 });
