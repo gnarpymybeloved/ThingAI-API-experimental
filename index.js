@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
-const { error } = require('console');
 
 const app = express();
 const port = 3000;
@@ -140,7 +139,6 @@ app.post('/process-request', async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error: 'ThingAI servers are currently having some issues, try again later.' });
     }
 
