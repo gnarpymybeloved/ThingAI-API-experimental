@@ -26,7 +26,9 @@ app.post('/process-request', async (req, res) => {
         let newModel;
         let systemMessage;
         let ProcessDrawing;
+        let AttachedImage;
         ProcessDrawing = process_draw_command
+        AttachedImage = image_url
 
         switch (model) {
             case 'ThingAI 2.0':
@@ -120,6 +122,7 @@ app.post('/process-request', async (req, res) => {
                 const drawPayload = {
                     model: newDrawModel,
                     prompt: responseData.content.substring(8),
+                    image_url: AttachedImage,
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
