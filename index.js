@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/process-request', async (req, res) => {
+app.post('/chat/completions', async (req, res) => {
     try {
         const { model, process_draw_command, messages } = req.body;
         if (!Array.isArray(messages) || messages.length === 0) {
