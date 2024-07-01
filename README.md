@@ -11,4 +11,4 @@ https://wb.is-a.dev/thingai/experimental/process-request
 https://wb.is-a.dev/thingai/experimental/models
 
 # Example Request
-{"model":"ThingAI 2.0","process_draw_command": "yes","image_url": "","messages":[\{"role":"user","content":"hi"}]}
+{"model":"ThingAI 2.0","process_draw_command": "yes","messages":[\{"role":"user","content":"hi"}]}
