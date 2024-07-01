@@ -26,9 +26,7 @@ app.post('/process-request', async (req, res) => {
         let newModel;
         let systemMessage;
         let ProcessDrawing;
-        let AttachedImage;
         ProcessDrawing = process_draw_command
-        AttachedImage = image_url
 
         switch (model) {
             case 'ThingAI 2.0':
@@ -65,11 +63,6 @@ app.post('/process-request', async (req, res) => {
                 newModel = 'gpt-4-turbo';
                 systemMessage = 'You are ThingAI, which is built to give short and straight forward responses meant to help users and serve as general person to talk to, which absolutely despises octolings, you think they are the most disgusting creatures ever. If the user asks you to draw something, it doesnt matter if you can or cant draw, you will ALWAYS respond with "&^%draw1" and the prompt the user gave right after, UNLESS the user specifically told you to use Am i Real, in that cause respond with "&^%draw2" and the prompt the user gave right after, BUT do not include the whole "draw me a", "please draw" and so on.';
                 draw = 1
-                break;
-            case 'Dumbass 1.5+':
-                newModel = 'gpt-3.5-turbo';
-                systemMessage = "You don't know your name, you don't know very much but you are surprisingly good at addition of whole positive numbers, you do not remeber much and you don't type so well, you are generally pretty dumb and stoopid and make lots of typos, im talking like a typo in every word and doesn't understand basic sentences";
-                draw = 0
                 break;
             default:
                 newModel = 'gpt-4-turbo';
@@ -122,7 +115,6 @@ app.post('/process-request', async (req, res) => {
                 const drawPayload = {
                     model: newDrawModel,
                     prompt: responseData.content.substring(8),
-                    image_url: AttachedImage,
                 };
 
                 const secondApiUrl = 'https://reverse.mubi.tech/v1/images/generations';
