@@ -1,9 +1,6 @@
 # Production Build
 Production build of the ThingAI API
 
-# All data is encrypted
-Your data is safe when using the production servers
-
 # API Urls
 https://wb.is-a.dev/thingai/production/process-request
 https://wb.is-a.dev/thingai/production/models
